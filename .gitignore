@@ -1,0 +1,6 @@
+build/
+conf/sanity_info
+meta-fsl-arm-extra/
+meta-fsl-arm/
+meta-openembedded/
+poky/
