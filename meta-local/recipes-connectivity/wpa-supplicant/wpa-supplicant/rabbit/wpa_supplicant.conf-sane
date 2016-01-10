@@ -1,0 +1,7 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=0
+update_config=1
+country=SE
+
+#network={
+#	key_mgmt=NONE
+#}

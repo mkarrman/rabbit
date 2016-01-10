@@ -1,0 +1,46 @@
+#!/bin/sh
+
+## OpenEmbedded environment setup script for CuBox-i
+##
+## Before starting a build from a build shell; cd to the directory holding
+## this file and then source the file:
+## . set-oe-env
+##
+
+## Set TOPDIR, DL_DIR and DL_MIRROR ##
+TOPDIR=$(readlink -f .)
+[ "$DOWNLOADS" == "" ] && DOWNLOADS="../downloads"
+DL_DIR=$(readlink -f $DOWNLOADS)
+if [ ! -d $DL_DIR ]; then
+	echo "Error: Downloads directory '$DL_DIR' missing!"
+	return 1
+fi
+export TOPDIR DL_DIR
+
+## Create an empty build directory ##
+BDIR=$TOPDIR/build
+if [ ! -d $BDIR ]; then
+	echo "Creating a build directory..."
+	mkdir $BDIR
+fi
+
+## TBD: Auto check-out used layers...
+#RELBRANCH=jethro
+#git clone -b $RELBRANCH git://git.yoctoproject.org/poky.git
+#git clone -b $RELBRANCH git://git.openembedded.org/meta-openembedded
+#git clone -b $RELBRANCH git://git.yoctoproject.org/meta-fsl-arm
+#git clone -b $RELBRANCH https://github.com/Freescale/meta-fsl-arm-extra
+
+## Source the OE-core supplied environment setup script ##
+echo "Processing OE-core internal setup..."
+OEROOT=$TOPDIR/poky
+. $OEROOT/scripts/oe-buildenv-internal
+if [ $? -ne 0 ]; then
+	echo "Error: OE-core setup script failed!"
+	return 1
+fi
+
+## Add to the BitBake environment awareness ##
+export BB_ENV_EXTRAWHITE="$BB_ENV_EXTRAWHITE TOPDIR DL_DIR DL_MIRROR"
+
+echo "Setup complete!"
