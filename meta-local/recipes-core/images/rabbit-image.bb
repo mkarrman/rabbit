@@ -11,6 +11,7 @@ IMAGE_INSTALL = "\
     crda \
     dropbear \
     firmware-htc-9271 \
+    iw \
     kernel-module-ath9k-htc \
     wpa-supplicant \
 "
