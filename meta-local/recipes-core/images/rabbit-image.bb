@@ -21,6 +21,7 @@ IMAGE_INSTALL += "\
     gdbserver \
     lrzsz \
     lttng-modules \
+    wireless-tools \
 "
 
 IMAGE_LINGUAS = " "
