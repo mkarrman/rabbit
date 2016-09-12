@@ -7,6 +7,14 @@
 ## . set-oe-env
 ##
 
+## Meta data versions to use (branch name or commit sha) ##
+#RELBRANCH=jethro
+POKY_VER=40376446904ae3529be41737fed9a0b650ed167d
+META_OPENEMBEDDED_VER=8ab04afbffb4bc5184cfe0655049de6f44269990
+META_FSL_ARM_VER=417f669e4dede244a81e11aa6d8b60c4e333e589
+META_FSL_ARM_EXTRA_VER=dd074c47af53948041f6c5671e519fbf815b0980
+
+
 ## Set TOPDIR, DL_DIR and DL_MIRROR ##
 TOPDIR=$(readlink -f .)
 [ "$DOWNLOADS" == "" ] && DOWNLOADS="../downloads"
@@ -24,12 +32,39 @@ if [ ! -d $BDIR ]; then
 	mkdir $BDIR
 fi
 
-## TBD: Auto check-out used layers...
-#RELBRANCH=jethro
-#git clone -b $RELBRANCH git://git.yoctoproject.org/poky.git
-#git clone -b $RELBRANCH git://git.openembedded.org/meta-openembedded
-#git clone -b $RELBRANCH git://git.yoctoproject.org/meta-fsl-arm
-#git clone -b $RELBRANCH https://github.com/Freescale/meta-fsl-arm-extra
+## Auto check-out used layers ##
+
+clone_repo () {
+	repo_url="$1"
+	checkout="$2"
+	repo_name=$(basename "${repo_url}" ".git")
+
+	echo "Checking for $checkout of $repo_name"
+	if [ ! -d "$repo_name" ]; then
+		git clone -nq "$repo_url" "$repo_name"
+		if [ $? -ne 0 ]; then
+			echo "Error: Failed to clone $repo_url"
+			return 1
+		fi
+	fi
+
+	cd "$repo_name"
+
+	git checkout -q "$checkout"
+	if [ $? -ne 0 ]; then
+		echo "Error: Failed to check out $checkout of $repo_name"
+		return 1
+	fi
+
+	cd - > /dev/null
+	return 0
+}
+
+clone_repo git://git.yoctoproject.org/poky.git $POKY_VER || return 1
+clone_repo git://git.openembedded.org/meta-openembedded $META_OPENEMBEDDED_VER || return 1
+clone_repo git://git.yoctoproject.org/meta-fsl-arm $META_FSL_ARM_VER || return 1
+clone_repo https://github.com/Freescale/meta-fsl-arm-extra $META_FSL_ARM_EXTRA_VER || return 1
+
 
 ## Source the OE-core supplied environment setup script ##
 echo "Processing OE-core internal setup..."
