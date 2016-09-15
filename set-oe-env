@@ -23,7 +23,8 @@ if [ ! -d $DL_DIR ]; then
 	echo "Error: Downloads directory '$DL_DIR' missing!"
 	return 1
 fi
-export TOPDIR DL_DIR
+DL_MIRROR="file:///home/mats/project/dlmirror/"
+export TOPDIR DL_DIR DL_MIRROR
 
 ## Create an empty build directory ##
 BDIR=$TOPDIR/build
