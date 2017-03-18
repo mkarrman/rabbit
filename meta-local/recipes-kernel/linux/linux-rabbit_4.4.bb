@@ -6,7 +6,7 @@ DESCRIPTION = "Linux kernel that is based on Kernel.org's 4.4.y stable branch, \
 with full support for the i.MX6 features with added patches for rabbit."
 
 DEPENDS += "lzop-native bc-native"
-SRCBRANCH = "linux-4.4.y"
+SRCBRANCH = "linux-4.4.y-rabbit"
 SRCREV = "${AUTOREV}"
 LOCALVERSION ?= "-${SRCBRANCH}"
 
