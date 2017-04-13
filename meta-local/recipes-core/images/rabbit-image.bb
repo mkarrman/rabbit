@@ -1,6 +1,7 @@
 SUMMARY = "An image for the Rabbit Empire Monitoring project"
 
-IMAGE_FEATURES += "tools-profile package-management"
+#IMAGE_FEATURES += "tools-profile"
+IMAGE_FEATURES += "package-management"
 
 IMAGE_INSTALL = "\
     packagegroup-core-boot \
