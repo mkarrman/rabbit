@@ -1,11 +1,15 @@
 #!/bin/sh
 
-## OpenEmbedded environment setup script for CuBox-i
+## OpenEmbedded environment setup script for Rabbit project
 ##
 ## Before starting a build from a build shell; cd to the directory holding
 ## this file and then source the file:
-## . set-oe-env
 ##
+## $ . set-oe-env
+##
+## Or, to update existing sub-repo clones to latest revision:
+##
+## $ PULL=1 . set-oe-env
 
 ## Meta data versions to use (branch name or commit sha) ##
 RELBRANCH=master
@@ -47,15 +51,19 @@ clone_repo () {
 			echo "Error: Failed to clone $repo_url"
 			return 1
 		fi
+		cd "$repo_name"
+	else
+		cd "$repo_name"
+		git fetch
 	fi
-
-	cd "$repo_name"
 
 	git checkout -q "$checkout"
 	if [ $? -ne 0 ]; then
 		echo "Error: Failed to check out $checkout of $repo_name"
 		return 1
 	fi
+
+	[ "$PULL" == "1" ] && git pull
 
 	cd - > /dev/null
 	return 0
