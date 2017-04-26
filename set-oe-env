@@ -15,8 +15,8 @@
 RELBRANCH=master
 POKY_VER=$RELBRANCH
 META_OPENEMBEDDED_VER=$RELBRANCH
-META_FSL_ARM_VER=$RELBRANCH
-META_FSL_ARM_EXTRA_VER=$RELBRANCH
+META_FREESCALE_VER=$RELBRANCH
+META_FREESCALE_3RDPARTY_VER=$RELBRANCH
 
 
 ## Set TOPDIR, DL_DIR and DL_MIRROR ##
@@ -71,8 +71,8 @@ clone_repo () {
 
 clone_repo git://git.yoctoproject.org/poky.git $POKY_VER || return 1
 clone_repo git://git.openembedded.org/meta-openembedded $META_OPENEMBEDDED_VER || return 1
-clone_repo git://git.yoctoproject.org/meta-fsl-arm $META_FSL_ARM_VER || return 1
-clone_repo https://github.com/Freescale/meta-fsl-arm-extra $META_FSL_ARM_EXTRA_VER || return 1
+clone_repo https://github.com/Freescale/meta-freescale $META_FREESCALE_VER || return 1
+clone_repo https://github.com/Freescale/meta-freescale-3rdparty $META_FREESCALE_3RDPARTY_VER || return 1
 
 
 ## Source the OE-core supplied environment setup script ##

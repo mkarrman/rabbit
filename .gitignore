@@ -1,5 +1,7 @@
 build/
 conf/sanity_info
+meta-freescale/
+meta-freescale-3rdparty/
 meta-fsl-arm-extra/
 meta-fsl-arm/
 meta-openembedded/
