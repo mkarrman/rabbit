@@ -1,5 +1,4 @@
 include recipes-kernel/linux/linux-imx.inc
-include recipes-kernel/linux/linux-dtb.inc
 
 SUMMARY = "Linux 4.4.y kernel from Kernel.org stable with ??? patches for rabbit"
 DESCRIPTION = "Linux kernel that is based on Kernel.org's 4.4.y stable branch, \
