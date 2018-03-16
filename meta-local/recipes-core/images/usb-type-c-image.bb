@@ -27,4 +27,4 @@ inherit core-image
 IMAGE_ROOTFS_SIZE ?= "8192"
 
 # Uncomment to *not* have the final image gzip'ed
-#IMAGE_FSTYPES = "sdcard"
+#IMAGE_FSTYPES = "wic"
