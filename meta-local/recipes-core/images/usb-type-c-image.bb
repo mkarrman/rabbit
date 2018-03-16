@@ -16,6 +16,10 @@ IMAGE_INSTALL += "\
 
 IMAGE_LINGUAS = " "
 
+IMAGE_BOOT_FILES += "\
+    boot.scr \
+"
+
 LICENSE = "MIT"
 
 inherit core-image
