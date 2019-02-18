@@ -12,7 +12,7 @@
 ## $ PULL=1 . set-oe-env
 
 ## Meta data versions to use (branch name or commit sha) ##
-RELBRANCH=rocko
+RELBRANCH=thud
 POKY_VER=$RELBRANCH
 META_OPENEMBEDDED_VER=$RELBRANCH
 META_FREESCALE_VER=$RELBRANCH
