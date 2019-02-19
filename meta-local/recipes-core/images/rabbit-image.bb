@@ -5,7 +5,6 @@ IMAGE_FEATURES += "package-management"
 
 IMAGE_INSTALL = "\
     packagegroup-core-boot \
-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     connman \
     connman-client \
     connman-conf \
@@ -21,11 +20,15 @@ IMAGE_INSTALL = "\
 IMAGE_INSTALL += "\
     gdbserver \
     lrzsz \
-    lttng-modules \
-    wireless-tools \
 "
+#    lttng-modules \
+#       - v2.10.7 is not compatible with kernel 5.0 due to access_ok() macro change
 
 IMAGE_LINGUAS = " "
+
+IMAGE_BOOT_FILES += "\
+    boot.scr \
+"
 
 LICENSE = "MIT"
 
@@ -34,4 +37,4 @@ inherit core-image
 IMAGE_ROOTFS_SIZE ?= "8192"
 
 # Uncomment to *not* have the final image gzip'ed
-IMAGE_FSTYPES = "sdcard"
+#IMAGE_FSTYPES = "wic"
