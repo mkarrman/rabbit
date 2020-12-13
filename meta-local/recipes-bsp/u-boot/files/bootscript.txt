@@ -1,5 +1,5 @@
 #/dev/mmcblk1p2
-part uuid mmc 0:2 rootuuid
+part uuid mmc 1:2 rootuuid
 setenv bootargs "console=${console} root=PARTUUID=${rootuuid} rootwait rw"
 load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} ${prefix}zImage
 load ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr_r} ${prefix}${fdtfile}
