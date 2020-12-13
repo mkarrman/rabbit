@@ -1,4 +1,4 @@
 # Limit supported technologies for rabbit
 
-PACKAGECONFIG_rabbit = "wifi iptables"
+PACKAGECONFIG_rabbit = "wifi iptables client"
 
