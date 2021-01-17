@@ -1,0 +1,59 @@
+# This is a system unit for launching Weston with auto-login as the
+# user configured here.
+# Service start triggered by udev rules in "71-weston-drm.rules"
+
+[Unit]
+Description=Weston, a Wayland compositor, as a system service
+Documentation=man:weston(1) man:weston.ini(5)
+Documentation=http://wayland.freedesktop.org/
+
+# Make sure we are started after logins are permitted.
+After=systemd-user-sessions.service
+
+# After GC firmware loaded too!!!???
+
+# If Plymouth is used, we want to start when it is on its way out.
+After=plymouth-quit-wait.service
+
+# D-Bus is necessary for contacting logind. Logind is required.
+Wants=dbus.socket
+After=dbus.socket
+
+Before=graphical.target
+
+[Service]
+# Requires systemd-notify.so Weston plugin.
+Type=notify
+Environment=XDG_RUNTIME_DIR=/run/user/%i
+EnvironmentFile=/etc/default/weston
+ExecStartPre=-/bin/sh -c "mkdir -p $XDG_RUNTIME_DIR && chmod 0700 $XDG_RUNTIME_DIR && chown %i $XDG_RUNTIME_DIR"
+ExecStart=/usr/bin/weston --modules=systemd-notify.so
+
+TimeoutStartSec=60
+WatchdogSec=20
+
+User=%I
+PermissionsStartOnly=true
+WorkingDirectory=/home/%i
+
+# Set up a full user session for the user, required by Weston.
+PAMName=weston-autologin
+
+# A virtual terminal is needed.
+TTYPath=/dev/tty7
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+
+# Fail to start if not controlling the tty.
+StandardInput=tty-fail
+StandardOutput=journal
+StandardError=journal
+
+# Log this user with utmp, letting it show up with commands 'w' and 'who'.
+UtmpIdentifier=tty7
+UtmpMode=user
+
+[Install]
+WantedBy=graphical.target
+DefaultInstance=tty7
