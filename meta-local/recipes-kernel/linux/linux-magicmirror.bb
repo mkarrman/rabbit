@@ -28,6 +28,3 @@ COMPATIBLE_MACHINE = "(magicmirror)"
 KCONFIG_MODE="--alldefconfig"
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
-## Uncomment the following to use local source tree ##
-inherit externalsrc
-EXTERNALSRC = "/home/mats/project/cubox/linux-rabbit"
