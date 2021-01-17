@@ -1,0 +1,12 @@
+[Unit]
+Description=Kiosker, a WebKitGtk2 based browser application for web kiosks.
+After=weston@root.service
+Before=graphical.target
+
+[Service]
+Type=exec
+Environment=XDG_RUNTIME_DIR=/run/user/root
+ExecStart=/usr/bin/kiosker
+
+[Install]
+WantedBy=graphical.target

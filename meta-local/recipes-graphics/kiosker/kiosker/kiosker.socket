@@ -1,0 +1,7 @@
+[Socket]
+ListenDatagram=/run/kiosker.sock
+Accept=no
+
+[Install]
+WantedBy=sockets.target
+
