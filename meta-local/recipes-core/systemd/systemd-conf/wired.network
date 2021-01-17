@@ -1,0 +1,11 @@
+[Match]
+Name=en* eth*
+KernelCommandLine=!nfsroot
+
+[Network]
+DHCP=ipv4
+
+[DHCPv4]
+UseMTU=yes
+RouteMetric=10
+ClientIdentifier=mac

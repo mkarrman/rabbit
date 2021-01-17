@@ -1,0 +1,12 @@
+[Match]
+Name=wl*
+WLANInterfaceType=station
+
+[Network]
+# prefer ipv4, ap may still request ipv6
+DHCP=ipv4
+
+[DHCPv4]
+UseMTU=yes
+RouteMetric=100
+ClientIdentifier=mac
